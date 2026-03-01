@@ -19,21 +19,21 @@
     <text class="section-title">可用设备</text>
     
     <view class="device-list">
-      <block wx:for="{{deviceList}}" wx:key="id">
-        <view class="device-card" bindtap="connectDevice" data-name="{{item.name}}">
+      <block wx:for="{{deviceList}}" wx:key="deviceId">
+        <view class="device-card" bindtap="connectDevice" data-id="{{item.deviceId}}" data-name="{{item.name}}">
           
           <view class="device-info">
             <view class="device-icon"></view> <view class="text-group">
               <text class="device-name">{{item.name}}</text>
-              <text class="device-mac">MAC: {{item.mac}}</text>
+              <text class="device-mac">ID: {{item.deviceId}}</text>
             </view>
           </view>
 
           <view class="action-group">
             <view class="signal-bars">
-              <view class="bar {{item.signal > -80 ? 'active' : ''}}"></view>
-              <view class="bar {{item.signal > -60 ? 'active' : ''}}"></view>
-              <view class="bar {{item.signal > -50 ? 'active' : ''}}"></view>
+              <view class="bar {{item.RSSI > -80 ? 'active' : ''}}"></view>
+              <view class="bar {{item.RSSI > -60 ? 'active' : ''}}"></view>
+              <view class="bar {{item.RSSI > -50 ? 'active' : ''}}"></view>
             </view>
             <view class="connect-btn">连接</view>
           </view>
