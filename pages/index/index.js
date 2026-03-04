@@ -26,6 +26,30 @@ Page({
         deviceName: app.globalData.deviceName || 'AST的\nRMB PRO'
       });
     }
+    
+    // 监听蓝牙连接状态变化
+    this.listenBluetoothState();
+  },
+  
+  // 监听蓝牙连接状态变化
+  listenBluetoothState() {
+    wx.onBLEConnectionStateChange((res) => {
+      console.log('蓝牙连接状态变化', res);
+      // 更新全局数据
+      app.globalData.isConnected = res.connected;
+      // 更新页面数据
+      this.setData({
+        isConnected: res.connected
+      });
+      // 如果断开连接，显示提示
+      if (!res.connected) {
+        wx.showToast({
+          title: '设备已断开连接，请重新搜索连接',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    });
   },
 
   goToConnect() {
